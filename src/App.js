@@ -14,9 +14,13 @@ function App() {
 		background:
 			'linear-gradient(87deg, rgba(63, 94, 251, 1) 0%, rgba(28, 37, 65, 1) 100%)',
 	};
-
+	const lightTheme = {
+		background:
+			'linear-gradient(87deg, rgba(192,214,223,1) 0%, rgba(219,233,238,1) 100%)',
+	};
 	const themes = {
 		dark: darkTheme,
+		light: lightTheme,
 	};
 	const [theme, setTheme] = useState('light');
 
@@ -24,8 +28,8 @@ function App() {
 		<Wrapper>
 			<Card>
 				<Background></Background>
-				<Image></Image>
 				<PersonalDetails>
+					<Image></Image>
 					<Name>Rebecca Brietzke</Name>
 					<Location>Marion, Texas</Location>
 				</PersonalDetails>
@@ -74,7 +78,6 @@ const Card = styled.div`
 	height: 450px;
 	width: 400px;
 	border-radius: 15px;
-	position: relative;
 	background-color: #fff;
 `;
 
@@ -117,9 +120,7 @@ const Image = styled.div`
 	border-radius: 50%;
 	height: 125px;
 	width: 125px;
-	position: absolute;
-	top: 85px;
-	left: 140px;
+	margin-top: -105px;
 	border: 6px solid #fff;
 `;
 
