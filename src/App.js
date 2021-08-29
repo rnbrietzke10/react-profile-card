@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
 import './App.css';
 import styled from 'styled-components';
 import img2 from './images/profile-pic.png';
 import moon from './images/icons8-moon-symbol-30.png';
 import sun from './images/icons8-sun.svg';
+import light from './images/clint-patterson-xfW9ZYfq3uE-unsplash.jpg';
 
 function App() {
 	const toggleBtn = {
@@ -13,10 +13,12 @@ function App() {
 	const darkTheme = {
 		background:
 			'linear-gradient(87deg, rgba(63, 94, 251, 1) 0%, rgba(28, 37, 65, 1) 100%)',
+		backgroundImg: `url("https://images.unsplash.com/photo-1590766232095-4f4daf8ca543?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3276&q=80")`,
 	};
 	const lightTheme = {
 		background:
 			'linear-gradient(87deg, rgba(192,214,223,1) 0%, rgba(219,233,238,1) 100%)',
+		backgroundImg: `url(${light})`,
 	};
 	const themes = {
 		dark: darkTheme,
@@ -25,9 +27,9 @@ function App() {
 	const [theme, setTheme] = useState('light');
 
 	return (
-		<Wrapper>
+		<Wrapper theme={themes[theme]}>
 			<Card>
-				<Background></Background>
+				<Background theme={themes[theme]}></Background>
 				<PersonalDetails>
 					<Image></Image>
 					<Name>Rebecca Brietzke</Name>
@@ -52,26 +54,24 @@ function App() {
 			<div className="toggle-container">
 				<img src={moon}></img>
 				<img src={sun} className="sun"></img>
-				<div className="toggle-btn" style={toggleBtn}></div>
+				<div
+					className="toggle-btn"
+					style={toggleBtn}
+					onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+				></div>
 			</div>
 		</Wrapper>
 	);
 }
 export default App;
 
-const backgroundImg =
-	'https://images.unsplash.com/photo-1590766232095-4f4daf8ca543?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3276&q=80';
 const Wrapper = styled.div`
 	height: 100vh;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(
-		87deg,
-		rgba(63, 94, 251, 1) 0%,
-		rgba(28, 37, 65, 1) 100%
-	);
+	background: ${props => props.theme.background};
 `;
 
 const Card = styled.div`
@@ -84,7 +84,7 @@ const Card = styled.div`
 const Background = styled.div`
 	height: 150px;
 	width: 100%;
-	background-image: url(${backgroundImg});
+	background-image: ${props => props.theme.backgroundImg};
 	background-size: cover;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
