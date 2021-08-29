@@ -7,18 +7,21 @@ import sun from './images/icons8-sun.svg';
 import light from './images/clint-patterson-xfW9ZYfq3uE-unsplash.jpg';
 
 function App() {
-	const toggleBtn = {
-		right: '5%',
-	};
 	const darkTheme = {
 		background:
 			'linear-gradient(87deg, rgba(63, 94, 251, 1) 0%, rgba(28, 37, 65, 1) 100%)',
 		backgroundImg: `url("https://images.unsplash.com/photo-1590766232095-4f4daf8ca543?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3276&q=80")`,
+		position: '55%',
+		cardBackground: 'gainsboro',
+		buttonColor: 'rgba(192,214,223,1)',
 	};
 	const lightTheme = {
 		background:
 			'linear-gradient(87deg, rgba(192,214,223,1) 0%, rgba(219,233,238,1) 100%)',
 		backgroundImg: `url(${light})`,
+		position: '2%',
+		cardBackground: '#fff',
+		buttonColor: 'rgba(28, 37, 65, 1)',
 	};
 	const themes = {
 		dark: darkTheme,
@@ -28,7 +31,7 @@ function App() {
 
 	return (
 		<Wrapper theme={themes[theme]}>
-			<Card>
+			<Card theme={themes[theme]}>
 				<Background theme={themes[theme]}></Background>
 				<PersonalDetails>
 					<Image></Image>
@@ -54,11 +57,10 @@ function App() {
 			<div className="toggle-container">
 				<img src={moon}></img>
 				<img src={sun} className="sun"></img>
-				<div
-					className="toggle-btn"
-					style={toggleBtn}
+				<Button
+					theme={themes[theme]}
 					onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-				></div>
+				></Button>
 			</div>
 		</Wrapper>
 	);
@@ -78,7 +80,7 @@ const Card = styled.div`
 	height: 450px;
 	width: 400px;
 	border-radius: 15px;
-	background-color: #fff;
+	background: ${props => props.theme.cardBackground};
 `;
 
 const Background = styled.div`
@@ -86,6 +88,7 @@ const Background = styled.div`
 	width: 100%;
 	background-image: ${props => props.theme.backgroundImg};
 	background-size: cover;
+	background-position: bottom;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 `;
@@ -141,4 +144,15 @@ const Description = styled.p`
 	text-align: center;
 	font-weight: bold;
 	font-size: 12px;
+`;
+
+const Button = styled.div`
+	background-color: ${props => props.theme.buttonColor};
+	height: 25px;
+	width: 25px;
+	border-radius: 40%;
+	position: absolute;
+	right: ${props => props.theme.position};
+	cursor: pointer;
+	transition: all 0.5s ease-out;
 `;
