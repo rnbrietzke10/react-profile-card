@@ -14,6 +14,7 @@ function App() {
 		position: '55%',
 		cardBackground: 'gainsboro',
 		buttonColor: 'rgba(192,214,223,1)',
+		pictureBorder: '6px solid gainsboro',
 	};
 	const lightTheme = {
 		background:
@@ -22,6 +23,7 @@ function App() {
 		position: '2%',
 		cardBackground: '#fff',
 		buttonColor: 'rgba(28, 37, 65, 1)',
+		pictureBorder: '6px solid #fff',
 	};
 	const themes = {
 		dark: darkTheme,
@@ -32,9 +34,9 @@ function App() {
 	return (
 		<Wrapper theme={themes[theme]}>
 			<Card theme={themes[theme]}>
-				<Background theme={themes[theme]}></Background>
+				<Background theme={themes[theme]} />
 				<PersonalDetails>
-					<Image></Image>
+					<Image theme={themes[theme]} />
 					<Name>Rebecca Brietzke</Name>
 					<Location>Marion, Texas</Location>
 				</PersonalDetails>
@@ -124,7 +126,7 @@ const Image = styled.div`
 	height: 125px;
 	width: 125px;
 	margin-top: -105px;
-	border: 6px solid #fff;
+	border: ${props => props.theme.pictureBorder};
 `;
 
 const Stat = styled.div`
